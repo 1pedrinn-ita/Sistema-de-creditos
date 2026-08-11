@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espia Fácil — Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .dashboard-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .dashboard-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(26, 25, 53, 0.95) 0%, rgba(13, 12, 34, 0.95) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .stats-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-decoration: none;
+      transition: var(--transition);
+      display: block;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+    .service-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .badge-free { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+    .badge-credits { background: rgba(255, 215, 0, 0.1); color: #ffd700; }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <div class="dashboard-wrapper">
+
+    <!-- Topbar -->
+    <nav class="topbar">
+      <img src="https://i.postimg.cc/nLWZtq6q/Favicon2.png" alt="Espia Fácil" class="topbar-logo">
+      <div class="topbar-actions">
+        <a href="index.html" class="topbar-btn">⏻ Sair</a>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+
+      <!-- Welcome Card -->
+      <div class="welcome-card animate-in">
+        <div class="welcome-text">
+          <h2 class="section-title" style="text-align: left;">Bem-vindo, <span id="user-name" class="text-accent">Agente</span>! 👋</h2>
+          <p class="section-subtitle" style="text-align: left; margin-bottom: 0;">Seu painel de investigação avançada está ativo.</p>
+        </div>
+        <div class="stats-row" style="display: flex; gap: 12px;">
+          <div class="stats-badge">
+            <span class="stat-val" id="credits-val">200</span>
+            <span class="stat-lbl">Créditos</span>
+          </div>
+          <div class="stats-badge">
+            <span class="stat-val">Nv.1</span>
+            <span class="stat-lbl">Status</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <h3 class="section-title" style="text-align: left; font-size: 1.2rem; margin-bottom: 20px;">Serviços de Inteligência</h3>
+
+      <div class="cards-grid">
+        <a href="search.html?service=instagram" class="service-card animate-in">
+          <h4 class="service-title">📸 Instagram Spy</h4>
+          <p class="service-desc">Extração de dados privados, seguidores e atividades em tempo real.</p>
+          <span class="badge badge-free">Grátis 🔥</span>
+        </a>
+
+        <a href="search.html?service=whatsapp" class="service-card animate-in">
+          <h4 class="service-title">💬 WhatsApp Spy</h4>
+          <p class="service-desc">Monitoramento de conversas, status e última vez online.</p>
+          <span class="badge badge-credits">40 créditos</span>
+        </a>
+
+        <a href="https://wa.me/5535996809091" target="_blank" class="service-card animate-in">
+          <h4 class="service-title">🕵️ Detetive Particular</h4>
+          <p class="service-desc">Investigação personalizada com relatórios de campo.</p>
+          <span class="badge badge-free">Consultar</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Welcome Modal -->
+  <div class="modal-overlay" id="welcome-modal">
+    <div class="modal-content">
+      <div class="modal-icon">🎁</div>
+      <h2 class="modal-title">BÔNUS LIBERADO!</h2>
+      <p class="modal-subtitle">
+        Você recebeu <span class="modal-highlight">200 créditos iniciais</span> para começar sua investigação agora mesmo!
+      </p>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="modal-close-btn">Começar Investigação</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espia Fácil — Investigar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .search-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search-card {
+      background: rgba(22, 20, 50, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .search-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .search-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .search-header p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Service Selector */
+    .service-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px;
+      border-radius: 10px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: transparent;
+      color: #94a3b8;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+    }
+
+    .mode-btn:hover {
+      border-color: #00d1d5;
+      color: #00d1d5;
+    }
+
+    .mode-btn.active {
+      background: #00d1d5;
+      color: #0d0c22;
+      border-color: #00d1d5;
+    }
+
+    /* Input Group */
+    .input-group {
+      margin-bottom: 24px;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      font-size: 1.1rem;
+      color: #00d1d5;
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #fff;
+      padding: 14px 16px 14px 44px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .form-input::placeholder {
+      color: rgba(148, 163, 184, 0.5);
+    }
+
+    .form-input:focus {
+      border-color: #00d1d5;
+      background: rgba(0, 209, 213, 0.05);
+    }
+
+    /* Info Box */
+    .info-box {
+      background: rgba(0, 209, 213, 0.08);
+      border: 1px solid rgba(0, 209, 213, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .info-box strong {
+      color: #00d1d5;
+      font-weight: 600;
+    }
+
+    /* Button */
+    .search-btn {
+      width: 100%;
+      padding: 16px;
+      background: #00d1d5;
+      color: #0d0c22;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .search-btn:hover {
+      background: #00f2f6;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 209, 213, 0.3);
+    }
+
+    .search-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Alert */
+    .alert {
+      background: rgba(255, 77, 109, 0.1);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      color: #ff8fa3;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      text-decoration: none;
+      margin-bottom: 30px;
+      transition: all 0.25s;
+    }
+
+    .back-link:hover {
+      color: #00d1d5;
+    }
+
+    @media (max-width: 600px) {
+      .search-card {
+        padding: 30px 20px;
+      }
+
+      .search-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <div class="search-wrapper">
+    <div class="search-card">
+      
+      <!-- Back Link -->
+      <a href="dashboard.html" class="back-link">← Voltar ao Dashboard</a>
+
+      <!-- Header -->
+      <div class="search-header">
+        <h1>🔍 Investigar Perfil</h1>
+        <p>Inicie sua investigação de inteligência avançada agora</p>
+      </div>
+
+      <!-- Alert -->
+      <div class="alert" id="search-alert">
+        ⚠ Preencha o campo para continuar.
+      </div>
+
+      <!-- Form -->
+      <form id="search-form">
+
+        <!-- Service Selector -->
+        <div class="service-selector" id="mode-tabs">
+          <button type="button" class="mode-btn active" data-mode="instagram">📸 Instagram</button>
+          <button type="button" class="mode-btn" data-mode="whatsapp">💬 WhatsApp</button>
+        </div>
+
+        <!-- Input -->
+        <div class="input-group">
+          <label class="input-label" for="target-input" id="input-label">Username do Instagram</label>
+          <div class="input-wrapper">
+            <span class="input-icon" id="input-icon">@</span>
+            <input
+              type="text"
+              id="target-input"
+              class="form-input"
+              placeholder="Digite o username (ex: joaosilva)"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+          💡 <strong>Dica:</strong> Para Instagram, use o @username. Para WhatsApp, use o número com DDD (ex: 11999887766).
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="search-btn" id="search-btn">
+          🚀 Iniciar Investigação
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

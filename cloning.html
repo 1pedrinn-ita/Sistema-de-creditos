@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espia Fácil — Processo de Clonagem</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cloning-content {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .process-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: var(--shadow-card);
+    }
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .step-title {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    .step-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .step-logs {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--accent);
+      max-height: 80px;
+      overflow-y: auto;
+    }
+    .log-entry { display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <div class="cloning-wrapper">
+
+    <!-- Topbar -->
+    <nav class="topbar">
+      <img src="https://i.postimg.cc/nLWZtq6q/Favicon2.png" alt="Espia Fácil" class="topbar-logo">
+      <div class="topbar-actions">
+        <div class="stats-badge" style="padding: 5px 12px; border-radius: 6px; border: 1px solid var(--border);">
+          <span class="stat-val" id="credits-val-nav" style="font-size: 1rem;">200</span>
+          <span class="stat-lbl" style="font-size: 0.5rem;">Créditos</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cloning-content animate-in">
+      <div class="process-header" style="text-align: center; margin-bottom: 30px;">
+        <h2 class="section-title">Extração em Andamento</h2>
+        <p class="section-subtitle">Alvo: <span id="target-display" class="text-accent">@usuario</span></p>
+        <div style="background: rgba(255, 77, 109, 0.1); border: 1px solid rgba(255, 77, 109, 0.3); color: #ff8fa3; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.85rem;">
+          ⏱ <strong>Tempo de Conclusão:</strong> Até 4 dias. Acelere com créditos para acesso imediato.
+        </div>
+        <div style="font-family: 'Orbitron', monospace; color: var(--accent); font-size: 1.2rem; margin-top: 15px;">
+          Progresso: <span id="total-percent">0</span>%
+        </div>
+      </div>
+
+      <div class="process-card">
+        <!-- Steps 1 to 5 -->
+        <div class="step-item" id="step-1">
+          <div class="step-header">
+            <span class="step-title">1. Coletando dados do perfil</span>
+            <span class="step-status" id="status-1">Aguardando...</span>
+          </div>
+          <div class="step-progress"><div class="step-progress-fill" id="progress-1"></div></div>
+          <div class="step-logs" id="logs-1"></div>
+          <button class="btn btn-primary accel-btn" data-step="1" style="margin-top: 15px; font-size: 0.8rem; padding: 10px;">⚡ Acelerar (45 créditos)</button>
+        </div>
+
+        <div class="step-item" id="step-2">
+          <div class="step-header">
+            <span class="step-title">2. Analisando conexões seguras</span>
+            <span class="step-status" id="status-2">Aguardando...</span>
+          </div>
+          <div class="step-progress"><div class="step-progress-fill" id="progress-2"></div></div>
+          <div class="step-logs" id="logs-2"></div>
+          <button class="btn btn-primary accel-btn" data-step="2" style="margin-top: 15px; font-size: 0.8rem; padding: 10px;">⚡ Acelerar (45 créditos)</button>
+        </div>
+
+        <div class="step-item" id="step-3">
+          <div class="step-header">
+            <span class="step-title">3. Extraindo interações privadas</span>
+            <span class="step-status" id="status-3">Aguardando...</span>
+          </div>
+          <div class="step-progress"><div class="step-progress-fill" id="progress-3"></div></div>
+          <div class="step-logs" id="logs-3"></div>
+          <button class="btn btn-primary accel-btn" data-step="3" style="margin-top: 15px; font-size: 0.8rem; padding: 10px;">⚡ Acelerar (45 créditos)</button>
+        </div>
+
+        <div class="step-item" id="step-4">
+          <div class="step-header">
+            <span class="step-title">4. Processando conteúdo de mídia</span>
+            <span class="step-status" id="status-4">Aguardando...</span>
+          </div>
+          <div class="step-progress"><div class="step-progress-fill" id="progress-4"></div></div>
+          <div class="step-logs" id="logs-4"></div>
+          <button class="btn btn-primary accel-btn" data-step="4" style="margin-top: 15px; font-size: 0.8rem; padding: 10px;">⚡ Acelerar (45 créditos)</button>
+        </div>
+
+        <div class="step-item" id="step-5">
+          <div class="step-header">
+            <span class="step-title">5. Finalizando clonagem total</span>
+            <span class="step-status" id="status-5">Aguardando...</span>
+          </div>
+          <div class="step-progress"><div class="step-progress-fill" id="progress-5"></div></div>
+          <div class="step-logs" id="logs-5"></div>
+          <button class="btn btn-primary accel-btn" data-step="5" style="margin-top: 15px; font-size: 0.8rem; padding: 10px;" id="final-accel-btn">⚡ Acelerar (45 créditos)</button>
+        </div>
+      </div>
+
+      <div class="tip-box" style="margin-top: 30px; background: rgba(0, 209, 213, 0.05); border: 1px solid var(--border-accent); padding: 15px; border-radius: 8px;">
+        <p class="section-subtitle" style="text-align: left; font-size: 0.85rem; margin-bottom: 0;">
+          ⏳ <strong>Aviso Importante:</strong> Este processo de extração profunda pode levar até <strong>4 dias</strong> para ser concluído de forma completamente indetectável. Use seus créditos para acelerar o acesso imediato a cada etapa.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="cloning-intro-modal">
+    <div class="modal-content">
+      <div class="modal-icon">⚙️</div>
+      <h2 class="modal-title">SISTEMA INICIADO</h2>
+      <p class="modal-subtitle">
+        A extração profunda de dados pode levar até <span class="modal-highlight">4 dias</span> para garantir o sigilo total.<br/><br/>
+        Você pode acelerar o processo usando seus créditos e obter o acesso agora!
+      </p>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="cloning-intro-close">Acessar Painel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="upsell-modal">
+    <div class="modal-content">
+      <div class="modal-icon">💎</div>
+      <h2 class="modal-title">CRÉDITOS INSUFICIENTES</h2>
+      <p class="modal-subtitle">
+        Você não possui créditos suficientes para finalizar a extração agora.<br/><br/>
+        <span class="modal-highlight">Adquira mais créditos</span> para concluir o processo imediatamente e acessar os dados!
+      </p>
+      <div class="modal-footer">
+        <a href="pricing.html" class="btn btn-primary">Comprar Créditos</a>
+        <button class="btn btn-secondary" id="upsell-close">Voltar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Adicionar lógica especial para o botão final
+    document.addEventListener('DOMContentLoaded', () => {
+      const finalBtn = document.getElementById('final-accel-btn');
+      if (finalBtn) {
+        finalBtn.addEventListener('click', (e) => {
+          const s = State.get();
+          if (s.credits < 45) {
+            // Redirecionar para pricing
+            window.location.href = 'pricing.html';
+          }
+        });
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
