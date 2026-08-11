@@ -409,7 +409,7 @@ function hideAllModals() {
       let logIdx = 0;
 
       const accelInterval = setInterval(() => {
-        localProg += Math.floor(Math.random() * 15) + 5;
+        localProg += Math.floor(Math.random() * 3) + 1;
         
         if (logIdx < logs.length && Math.random() > 0.5) {
           addLog(stepIdx, logs[logIdx]);
