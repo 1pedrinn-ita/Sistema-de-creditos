@@ -244,20 +244,20 @@
 
         <!-- Service Selector -->
         <div class="service-selector" id="mode-tabs">
-          <button type="button" class="mode-btn active" data-mode="instagram">📸 Instagram</button>
-          <button type="button" class="mode-btn" data-mode="whatsapp">💬 WhatsApp</button>
+          <button type="button" id="tab-instagram" class="mode-btn" data-mode="instagram" style="display: none;">📸 Instagram</button>
+          <button type="button" id="tab-whatsapp" class="mode-btn active" data-mode="whatsapp">💬 WhatsApp</button>
         </div>
 
         <!-- Input -->
         <div class="input-group">
-          <label class="input-label" for="target-input" id="input-label">Username do Instagram</label>
+          <label class="input-label" for="target-input" id="input-label">Número de WhatsApp</label>
           <div class="input-wrapper">
-            <span class="input-icon" id="input-icon">@</span>
+            <span class="input-icon" id="input-icon">📞</span>
             <input
               type="text"
               id="target-input"
               class="form-input"
-              placeholder="Digite o username (ex: joaosilva)"
+              placeholder="Ex: 11999887766 (com DDD)"
               autocomplete="off"
             />
           </div>

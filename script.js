@@ -229,6 +229,14 @@ function hideAllModals() {
   const form = $('search-form');
   if (!form) return;
 
+  // Libera a aba do Instagram somente se o acesso tiver sido comprado
+  const s = State.get();
+  const access = s.access || ['whatsapp'];
+  const instagramTab = $('tab-instagram');
+  if (instagramTab && access.includes('instagram')) {
+    instagramTab.style.display = '';
+  }
+
   // Service tabs
   const tabs = document.querySelectorAll('.mode-btn');
   tabs.forEach(tab => {
