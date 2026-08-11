@@ -128,7 +128,7 @@
       <h3 class="section-title" style="text-align: left; font-size: 1.2rem; margin-bottom: 20px;">Serviços de Inteligência</h3>
 
       <div class="cards-grid">
-        <a href="search.html?service=instagram" class="service-card animate-in">
+        <a href="search.html?service=instagram" id="instagram-card" class="service-card animate-in" style="display: none;">
           <h4 class="service-title">📸 Instagram Spy</h4>
           <p class="service-desc">Extração de dados privados, seguidores e atividades em tempo real.</p>
           <span class="badge badge-free">Grátis 🔥</span>
@@ -137,7 +137,7 @@
         <a href="search.html?service=whatsapp" class="service-card animate-in">
           <h4 class="service-title">💬 WhatsApp Spy</h4>
           <p class="service-desc">Monitoramento de conversas, status e última vez online.</p>
-          <span class="badge badge-credits">40 créditos</span>
+          <span class="badge badge-free">Incluso ✓</span>
         </a>
 
         <a href="https://wa.me/5535996809091" target="_blank" class="service-card animate-in">
@@ -165,5 +165,15 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const s = State.get();
+      const access = s.access || ['whatsapp'];
+      const instagramCard = document.getElementById('instagram-card');
+      if (instagramCard && access.includes('instagram')) {
+        instagramCard.style.display = '';
+      }
+    });
+  </script>
 </body>
 </html>

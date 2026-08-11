@@ -65,6 +65,7 @@ const State = {
       cloningIntroShown: false,
       currentStep: 1,
       stepProgress: [0, 0, 0, 0, 0],
+      access: ['whatsapp'],
     };
     try {
       const saved = localStorage.getItem('espia_facil_state');
@@ -90,6 +91,46 @@ const State = {
     if (targetEl) targetEl.textContent = s.target;
   }
 };
+
+/* ============================================
+   2b. CREDITOS E ACESSO A PRODUTOS APOS PAGAMENTO NA BRAVOPAY
+   ============================================ */
+(function applyPurchaseFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const purchased = parseInt(params.get('credits_purchased'), 10);
+    const accessParam = params.get('access');
+    let changed = false;
+    const updates = {};
+
+    if (purchased > 0) {
+      const s = State.get();
+      updates.credits = s.credits + purchased;
+      changed = true;
+    }
+
+    if (accessParam) {
+      const s = State.get();
+      const current = new Set(s.access || ['whatsapp']);
+      accessParam.split(',').forEach((item) => {
+        const clean = item.trim().toLowerCase();
+        if (clean) current.add(clean);
+      });
+      updates.access = Array.from(current);
+      changed = true;
+    }
+
+    if (changed) {
+      State.save(updates);
+      params.delete('credits_purchased');
+      params.delete('access');
+      const query = params.toString();
+      const newUrl = window.location.pathname + (query ? `?${query}` : '') + window.location.hash;
+      window.history.replaceState({}, '', newUrl);
+      State.updateUI();
+    }
+  } catch (e) {}
+})();
 
 /* ============================================
    3. UTILITIES
