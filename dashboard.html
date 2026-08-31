@@ -135,6 +135,10 @@
         <div class="welcome-text">
           <h2 class="section-title" style="text-align: left;">Bem-vindo, <span id="user-name" class="text-accent">Agente</span>! 👋</h2>
           <p class="section-subtitle" style="text-align: left; margin-bottom: 0;">Seu painel de investigação avançada está ativo.</p>
+          <!-- Selo Membro Vitalício -->
+          <div id="vitalicio-seal" style="display: none; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 14px; border-radius: 99px; width: fit-content; background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b); color: #1a1a1a; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.5px; box-shadow: 0 2px 12px rgba(255, 215, 0, 0.35);">
+            <span>👑</span><span>MEMBRO VITALÍCIO</span>
+          </div>
         </div>
         <div class="stats-row" style="display: flex; gap: 12px;">
           <div class="stats-badge">
@@ -203,6 +207,10 @@
       const antiBanner = document.getElementById('antinotificacao-banner');
       if (antiBanner && access.includes('antinotificacao')) {
         antiBanner.style.display = '';
+      }
+      const vitalicioSeal = document.getElementById('vitalicio-seal');
+      if (vitalicioSeal && access.includes('vitalicio')) {
+        vitalicioSeal.style.display = 'flex';
       }
     });
   </script>
